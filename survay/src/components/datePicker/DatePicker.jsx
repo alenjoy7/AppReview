@@ -1,13 +1,21 @@
-import PropTypes from "prop-types";
-import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
-import { FormControl } from "../ui/form";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "../ui/calendar";
 import { useRef } from "react";
 
+import { format } from "date-fns";
+import PropTypes from "prop-types";
+import { CalendarIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+
+import { Button } from "../ui/button";
+import { FormControl } from "../ui/form";
+import { Calendar } from "../ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+
+/**
+ * datepicker component to get the date
+ * @param {*} param0
+ * @returns datepicker
+ */
 const DatePicker = ({ field }) => {
   const calenderPopover = useRef(null);
   /**

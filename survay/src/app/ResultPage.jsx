@@ -1,12 +1,20 @@
-import Loader from "@/components/loaders/Loader";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { getSurvayResult } from "@/security/services/vendorService";
-import { sliderVariation } from "@/utils/data/data";
-import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
+import { Button } from "@/components/ui/button";
+import Loader from "@/components/loaders/Loader";
+import { useQuery } from "@tanstack/react-query";
+import { sliderVariation } from "@/utils/data/data";
+import { Card, CardContent } from "@/components/ui/card";
+import { getSurvayResult } from "@/security/services/vendorService";
+
+/**
+ * Result page to show the result of submited form
+ * @returns
+ */
 const ResultPage = () => {
+  /**
+   * react query to manage data-fetching and caching
+   */
   const { isLoading, isError, error, data } = useQuery({
     queryKey: ["survayResult"],
     queryFn: getSurvayResult,
@@ -15,9 +23,12 @@ const ResultPage = () => {
   if (isLoading) {
     return <Loader />;
   }
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
+  /**
+   * Handle index-based modifications for different cases.
+   * @param {number} index - The index to determine the modification.
+   * @param {any} answer - The input answer for modification.
+   * @returns {any} - The modified answer based on the given index.
+   */
   const handleIndexBasedModification = (index, answer) => {
     switch (index) {
       case 1:
@@ -25,7 +36,7 @@ const ResultPage = () => {
       case 2:
         return sliderVariation[answer[0]];
       case 4:
-        return new Date(answer).toDateString();
+        return new Date(answer);
       default:
         return answer;
     }
@@ -33,6 +44,11 @@ const ResultPage = () => {
 
   return (
     <div className="max-sm:px-3">
+      {isError && (
+        <p className="text-sm font-medium text-destructive p-2 bg-primary-foreground">
+          {error.response.data.message}
+        </p>
+      )}
       <h1 className="flex justify-center scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl my-8">
         App Review
       </h1>

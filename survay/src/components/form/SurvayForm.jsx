@@ -1,7 +1,15 @@
 import PropTypes from "prop-types";
 
+import {
+  selectMultipleItem,
+  selectSingleItem,
+  sliderVariation,
+} from "@/utils/data/data";
+
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { Slider } from "../ui/slider";
+import DatePicker from "../datePicker/DatePicker";
 import MultiSelectMenu from "../selectMenu/MultiSelectMenu";
 import SingleSelectMenu from "../selectMenu/SingleSelectMenu";
 import {
@@ -12,13 +20,14 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import DatePicker from "../datePicker/DatePicker";
-import { Slider } from "../ui/slider";
-import { selectMultipleItem, selectSingleItem, sliderVariation } from "@/utils/data/data";
 
+/**
+ * this component is the main form and it is used to collect the data from the user.
+ * And questions are hardcoded here we can change to dynamic and loop through if the values are questions are comming from api
+ * @param {*} param0
+ * @returns survay form
+ */
 const SurvayForm = ({ form, onSubmit }) => {
- 
- 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-1">
@@ -85,7 +94,10 @@ const SurvayForm = ({ form, onSubmit }) => {
             <FormItem>
               <FormLabel>Suggest any improvement</FormLabel>
               <FormControl>
-                <Input placeholder="your suggestions for improvement" {...field} />
+                <Input
+                  placeholder="your suggestions for improvement"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -1,5 +1,8 @@
 import * as z from "zod";
 
+/**
+ * zod validation of each questions
+ */
 export const survayFormSchema = z.object({
   question1: z.string().min(1, { message: "Yout have to select on item" }),
   question2: z.array(z.string()).refine((value) => value.some((item) => item), {

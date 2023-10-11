@@ -1,9 +1,14 @@
+import PropTypes from "prop-types";
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
+
+/**
+ * ui folder and its files are comming from the shadcn ui kit
+ */
 
 const Form = FormProvider;
 
@@ -51,6 +56,10 @@ const FormItem = React.forwardRef(({ className, ...props }, ref) => {
     </FormItemContext.Provider>
   );
 });
+
+FormItem.propTypes = {
+  className: PropTypes.any,
+};
 FormItem.displayName = "FormItem";
 
 const FormLabel = React.forwardRef(({ className, ...props }, ref) => {
@@ -65,6 +74,10 @@ const FormLabel = React.forwardRef(({ className, ...props }, ref) => {
     />
   );
 });
+
+FormLabel.propTypes = {
+  className: PropTypes.any,
+};
 FormLabel.displayName = "FormLabel";
 
 const FormControl = React.forwardRef(({ ...props }, ref) => {
@@ -99,6 +112,10 @@ const FormDescription = React.forwardRef(({ className, ...props }, ref) => {
     />
   );
 });
+
+FormDescription.propTypes = {
+  className: PropTypes.any,
+};
 FormDescription.displayName = "FormDescription";
 
 const FormMessage = React.forwardRef(

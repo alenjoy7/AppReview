@@ -1,14 +1,20 @@
 import PropTypes from "prop-types";
+import { ChevronDown } from "lucide-react";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
-import { Checkbox } from "../ui/checkbox";
-import { ChevronDown } from "lucide-react";
 
+import { Checkbox } from "../ui/checkbox";
+import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+
+/**
+ * component to used for selecting multiple values
+ * @param {*} param0
+ * @returns multiple select menu
+ */
 const MultiSelectMenu = ({
   defaultValue = [],
   placeholder = "select the items",

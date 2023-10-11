@@ -1,6 +1,12 @@
 import PropTypes from "prop-types";
-import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
+
+import { Button } from "../ui/button";
+/**
+ * error boundary fallback component,it will shown when unhandled error occur
+ * @param {*} param0 
+ * @returns 
+ */
 export default function ErrorFallback({ error, resetErrorBoundary }) {
   const navigate = useNavigate();
   const handleReturn = () => {

@@ -34,7 +34,6 @@ const addSurvayService = async ({
 const getSurvayResultService = async () => {
   let response = await survay.findOne({ status: 1 }).sort({ createdAt: -1 });
   let data = [];
-  console.log(response);
   for (const index in questionArray) {
     let temp = Number(index) + 1;
     data.push({

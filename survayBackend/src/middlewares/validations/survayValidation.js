@@ -45,14 +45,12 @@ const survayValidation = (requestCondition) => {
           }),
         body("question4").trim().notEmpty().isLength({ min: 2, max: 50 }),
         body("question5")
-          .isDate()
+          .isISO8601()
           .withMessage("Enter date in correct format")
           .custom((value) => {
-            const currentDate = new Date();
+            let currentDate = new Date();
             let date = new Date(value);
-            currentDate.setHours(0, 0, 0, 0);
-            date.setHours(0, 0, 0, 0);
-            if (date < currentDate) {
+            if (date > currentDate) {
               throw new Error(
                 "dob date should be less than or equal to todays date"
               );

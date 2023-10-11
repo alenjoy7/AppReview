@@ -1,14 +1,24 @@
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
+import Loader from "@/components/loaders/Loader";
+import { useMutation } from "@tanstack/react-query";
 import SurvayForm from "@/components/form/SurvayForm";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { survayFormSchema } from "@/utils/formSchema/FormSchema";
-import { useForm } from "react-hook-form";
 import { Card, CardContent } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
 import { addSurvay } from "@/security/services/vendorService";
-import Loader from "@/components/loaders/Loader";
+import { survayFormSchema } from "@/utils/formSchema/FormSchema";
+import { queryClient } from "@/main";
+
+/**
+ * home page to take survay
+ * @returns home page
+ */
 const HomePage = () => {
   const navigate = useNavigate();
+  /**
+   * use form to handle form
+   */
   const form = useForm({
     resolver: zodResolver(survayFormSchema),
     defaultValues: {
@@ -19,25 +29,35 @@ const HomePage = () => {
       question5: new Date(),
     },
   });
+  /**
+   * react query to manage data-fetching and caching
+   */
   const { mutateAsync, isLoading, isError, error } = useMutation({
     mutationFn: addSurvay,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["survayResult"] });
+    },
   });
 
   if (isLoading) {
     return <Loader />;
   }
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
+
+  /**
+   * func to handle submition of form data
+   * @param {*} data
+   */
   const onSubmit = async (data) => {
-    const date = new Date(data.question5);
-    const formattedDate = date.toISOString().split("T")[0];
-    data.question5 = formattedDate;
     await mutateAsync(data);
     navigate("/result");
   };
   return (
     <div className="max-sm:px-3">
+      {isError && (
+        <p className="text-sm font-medium text-destructive p-2 bg-primary-foreground">
+          {error.response.data.message}
+        </p>
+      )}
       <h1 className="flex justify-center scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 mt-2">
         App Review
       </h1>

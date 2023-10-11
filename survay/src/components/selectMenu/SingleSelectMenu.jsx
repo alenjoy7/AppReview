@@ -10,6 +10,11 @@ import {
 
 import { FormControl } from "../ui/form";
 
+/**
+ * component to used for selecting single values
+ * @param {*} param0
+ * @returns select menu component
+ */
 const SingleSelectMenu = ({
   handleOnChange,
   placeholder = "select the item",
@@ -19,7 +24,7 @@ const SingleSelectMenu = ({
     <Select onValueChange={handleOnChange}>
       <FormControl>
         <SelectTrigger className="data-[placeholder]:text-muted-foreground">
-          <SelectValue placeholder={placeholder}/>
+          <SelectValue placeholder={placeholder} />
         </SelectTrigger>
       </FormControl>
       <SelectContent>
