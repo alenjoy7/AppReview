@@ -4,7 +4,7 @@
 ## first terminal-(backend)
 ```cd survayBackend```
 <br>
-``create new .env file using .env.sample file``
+``create new .env file using .env.sample file, i have used mongodb atlas so add the atlaspassword and atlasuser``
 <br>
 ```pnpm i```
 <br>
