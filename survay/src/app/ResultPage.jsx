@@ -36,7 +36,7 @@ const ResultPage = () => {
       case 2:
         return sliderVariation[answer[0]];
       case 4:
-        return new Date(answer);
+        return new Date(answer).toDateString();
       default:
         return answer;
     }
